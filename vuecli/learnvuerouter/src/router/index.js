@@ -2,8 +2,11 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
-import About from '../components/About'
+
+// import HelloWorld from '../components/HelloWorld'
+// import About from '../components/About'
+const HelloWorld = () => import('../components/HelloWorld')
+const About = () => import('../components/About')
 
 //1.通过Vue.use(插件),安装插件
 Vue.use(VueRouter)
@@ -11,6 +14,11 @@ Vue.use(VueRouter)
 //2.创建VueRouter对象
 
 const routes = [
+  {
+    path: '',
+    name: 'HelloWorld',
+    component: HelloWorld
+  },
   {
     path: '/home/',
     name: 'HelloWorld',
