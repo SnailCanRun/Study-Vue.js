@@ -1,42 +1,56 @@
-//配置路由相关信息
-
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
-import About from '../components/About'
+import Home from '../components/Home.vue'
+import About from '../components/About.vue'
+import User from '../components/User.vue'
 
-//1.通过Vue.use(插件),安装插件
+const Profile = () => import('../components/Profile.vue')//路由懒加载
+const HomeMsgs = () => import('../components/HomeMsgs.vue')
+const HomeNews = () => import('../components/HomeNews.vue')
+
 Vue.use(VueRouter)
-
-//2.创建VueRouter对象
-
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err)
+// }
 const routes = [
   {
-    path: '/home/',
-    name: 'HelloWorld',
-    component: HelloWorld
+    path: '',
+    redirect: '/home'
   },
   {
-    path: '/about/',
-    name: 'About',
+    path: '/home',
+    component: Home,
+    children: [
+      {
+        path: 'msgs',
+        component: HomeMsgs
+      },
+      {
+        path: 'news',
+        component: HomeNews
+      }
+    ]
+  },
+  {
+    path: '/about',
+    name: '关于',
     component: About
+  },
+  {
+    path: '/user/:userId',
+    name: '用户',
+    component: User
+  },
+  {
+    path: '/profile',
+    component: Profile
   }
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 
-//3.将router对象传到vue实例中
-// 导出给其他地方用
 export default router
-
-// export default new VueRouter({
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'HelloWorld',
-//       component: HelloWorld
-//     }
-//   ]
-// })
