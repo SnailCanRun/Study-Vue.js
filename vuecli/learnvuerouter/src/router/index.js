@@ -23,6 +23,10 @@ const routes = [
     component: Home,
     children: [
       {
+        path: '',
+        redirect: 'msgs'
+      },
+      {
         path: 'msgs',
         component: HomeMsgs
       },
@@ -30,27 +34,55 @@ const routes = [
         path: 'news',
         component: HomeNews
       }
-    ]
+    ],
+    meta: {
+      title: 'home'
+    }
   },
   {
     path: '/about',
     name: '关于',
-    component: About
+    component: About,
+    meta: {
+      title: '关于'
+    }
   },
   {
     path: '/user/:userId',
     name: '用户',
-    component: User
+    component: User,
+    meta: {
+      title: '用户'
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      title: '档案'
+    }
   }
 ]
 
 const router = new VueRouter({
   routes,
   mode: 'history'
+})
+
+// router.beforeEach(function (to,from,next) {
+
+// })
+
+//前置守卫(guard)，需要调用next()函数
+router.beforeEach((to, from, next) => {
+  // document.title = to.title
+  document.title = to.matched[0].meta.title
+  console.log(to.matched[0].meta.title);
+  next()
+})
+//后置钩子(hook)，不需要调用next()
+router.afterEach((to, from) => {
+
 })
 
 export default router

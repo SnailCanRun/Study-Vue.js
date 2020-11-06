@@ -9,6 +9,9 @@
 <script>
 export default {
   name: "Profile",
+  beforeRouteEnter(to, from, next) {
+    console.log("profile  vue");
+  },
 };
 </script>
 
