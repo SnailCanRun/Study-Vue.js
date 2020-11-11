@@ -45,6 +45,10 @@ const routes = [
     component: About,
     meta: {
       title: '关于'
+    },
+    beforeEnter: (to, from, next) => {
+      console.log('关于的钩子');
+      next()
     }
   },
   {

@@ -16,8 +16,29 @@
 <script>
 export default {
   name: "Home",
+  data() {
+    return {
+      path: "/home/msgs",
+    };
+  },
   created() {
-    document.title = "首页";
+    // document.title = "首页";
+    console.log("home created");
+  },
+  destroyde() {
+    console.log("home destoryed");
+  },
+  activated() {
+    console.log("home activated");
+    this.$router.push(this.path);
+  },
+  deactivated() {
+    console.log("home deactivated");
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log(this.$route.path, "home beforeRouteLeave");
+    this.path = this.$route.path;
+    next();
   },
 };
 </script>

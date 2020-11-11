@@ -14,10 +14,10 @@
         path: '/profile',
         query: { name: '周逸秋', age: 18, height: 180 },
       }"
-      >用户</router-link
+      >档案</router-link
     >
 
-    <router-view />
+    <keep-alive enclude="Profile,User"><router-view></router-view></keep-alive>
   </div>
 </template>
 
