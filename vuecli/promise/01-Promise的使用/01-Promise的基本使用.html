@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // //1.使用setTimeout
+    // setTimeout(() => {
+    //   console.log('Hello world');
+    // }, 1000)
+
+    //参数 -> 函数(resolve, reject)
+    //resolve, reject本身又是函数
+    new Promise((resolve, reject) => {
+      //第一次异步操作代码
+      setTimeout(() => {
+        resolve('Hello world')//会执行then()里面的代码
+        reject('error world')
+      }, 1000)
+    }).then((data) => {
+      //对第一次异步操作代码的结果进行处理
+      console.log(data);
+      console.log(data);
+
+      
+      return new Promise((resolve, reject) => {
+        //第二次异步操作代码
+        setTimeout(() => {
+          //resolve('Hello vue')
+          reject('error vue')
+        }, 1000)
+      }).then((data) => {
+        //对第二次异步操作代码的结果进行处理
+        console.log(data);
+        console.log(data);
+      }).catch((data) => {
+        console.log(data);
+        console.log(data);
+      })
+    }).catch((data) => {
+      console.log(data);
+      console.log(data);
+    })
+
+
+    //Promise的使用场景
+    //一般情况下，有异步操作的时候，使用Promise对异步操作进行封装
+    new Promise((resolve,reject) => {
+
+    })
+  </script>
+</body>
+</html>
